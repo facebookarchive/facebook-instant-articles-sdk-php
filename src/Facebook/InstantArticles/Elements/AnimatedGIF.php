@@ -27,6 +27,6 @@ namespace Facebook\InstantArticles\Elements;
  *
  * @see {link:https://developers.intern.facebook.com/docs/instant-articles/reference/animated-gif}
  */
-class AnimatedGIF extends Image
+class AnimatedGif extends Image
 {
 }
