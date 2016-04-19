@@ -39,7 +39,7 @@ composer dump-autoload
 
 ## Contributing
 
-For us to accept contributions you will have to first have signed the [Contributor License Agreement](https://code.facebook.com/cla). Please see [CONTRIBUTING](https://github.com/facebook/facebook-instant-articles-sdk-php/blob/master/CONTRIBUTING.md) for details.
+For us to accept contributions you will have to first have signed the [Contributor License Agreement](https://code.facebook.com/cla). Please see [CONTRIBUTING](https://github.com/facebook/facebook-instant-articles-sdk-php/blob/master/.github/CONTRIBUTING.md) for details.
 
 ## License
 
