@@ -46,12 +46,12 @@ class Header extends Element
     private $cover;
 
     /**
-     * string The title of the Article that will be displayed on header.
+     * string|H1 The title of the Article that will be displayed on header.
      */
     private $title;
 
     /**
-     * string The subtitle of the Article that will be displayed on header.
+     * string|H2 The subtitle of the Article that will be displayed on header.
      */
     private $subtitle;
 
@@ -104,11 +104,11 @@ class Header extends Element
 
     /**
      * Sets the title of InstantArticle
-     * @param string $title The title of the InstantArticle
+     * @param string|H1 $title The title of the InstantArticle
      */
     public function withTitle($title)
     {
-        Type::enforce($title, Type::STRING);
+        Type::enforce($title, array(Type::STRING, H1::getClassName()));
         $this->title = $title;
 
         return $this;
@@ -116,11 +116,11 @@ class Header extends Element
 
     /**
      * Sets the subtitle of InstantArticle
-     * @param string $subtitle The subtitle of the InstantArticle
+     * @param string|H2 $subtitle The subtitle of the InstantArticle
      */
     public function withSubTitle($subtitle)
     {
-        Type::enforce($subtitle, Type::STRING);
+        Type::enforce($subtitle, array(Type::STRING, H2::getClassName()));
         $this->subtitle = $subtitle;
 
         return $this;
@@ -235,7 +235,7 @@ class Header extends Element
     }
 
     /**
-     * @return string $title The title of the InstantArticle
+     * @return string|H1 $title The title of the InstantArticle
      */
     public function getTitle()
     {
@@ -243,7 +243,7 @@ class Header extends Element
     }
 
     /**
-     * @return string $subtitle The subtitle of the InstantArticle
+     * @return string|H2 $subtitle The subtitle of the InstantArticle
      */
     public function getSubtitle()
     {
@@ -307,15 +307,23 @@ class Header extends Element
         }
 
         if ($this->title) {
-            $title_element = $document->createElement('h1');
-            $title_element->appendChild($document->createTextNode($this->title));
-            $element->appendChild($title_element);
+            if (Type::is($this->title, Type::STRING)) {
+                $title_element = $document->createElement('h1');
+                $title_element->appendChild($document->createTextNode($this->title));
+                $element->appendChild($title_element);
+            } else {
+                $element->appendChild($this->title->toDOMElement($document));
+            }
         }
 
         if ($this->subtitle) {
-            $sub_title_element = $document->createElement('h2');
-            $sub_title_element->appendChild($document->createTextNode($this->subtitle));
-            $element->appendChild($sub_title_element);
+            if (Type::is($this->subtitle, Type::STRING)) {
+                $sub_title_element = $document->createElement('h2');
+                $sub_title_element->appendChild($document->createTextNode($this->subtitle));
+                $element->appendChild($sub_title_element);
+            } else {
+                $element->appendChild($this->subtitle->toDOMElement($document));
+            }
         }
 
         if ($this->published) {

@@ -8,6 +8,7 @@
  */
 namespace Facebook\InstantArticles\Transformer\Rules;
 
+use Facebook\InstantArticles\Elements\Header;
 use Facebook\InstantArticles\Elements\Caption;
 use Facebook\InstantArticles\Elements\H1;
 use Facebook\InstantArticles\Elements\Instantarticle;
@@ -17,7 +18,7 @@ class H1Rule extends ConfigurationSelectorRule
 {
     public function getContextClass()
     {
-        return [Caption::getClassName(), InstantArticle::getClassName()];
+        return [Header::getClassName(), Caption::getClassName(), InstantArticle::getClassName()];
     }
 
     public static function create()
@@ -53,7 +54,7 @@ class H1Rule extends ConfigurationSelectorRule
     public function apply($transformer, $context_element, $node)
     {
         $h1 = H1::create();
-        if (Type::is($context_element, Caption::getClassName())) {
+        if (Type::is($context_element, array(Header::getClassName(), Caption::getClassName()))) {
             $context_element->withTitle($h1);
         } elseif (Type::is($context_element, InstantArticle::getClassName())) {
             $context_element->addChild($h1);

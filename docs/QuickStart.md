@@ -627,8 +627,8 @@ Transformer Rule Class | Properties | Permitted Context | Notes
 Transformer Rule Class | Properties | Permitted Context | Notes
 --- | --- | --- | ---
 `BlockquoteRule` |  | *InstantArticle* | 
-`H1Rule` |  | *Caption*, *InstantArticle* | 
-`H2Rule` |  | *Caption*, *InstantArticle* | 
+`H1Rule` |  | *Caption*, *Header*, *InstantArticle* | 
+`H2Rule` |  | *Caption*, *Header*, *InstantArticle* | 
 `HeaderRule` |  | *InstantArticle* | Can apply to all headers (`HeaderKickerRule`, `HeaderSubTitleRule`, `HeaderTitleRule`)
 `ListElementRule` |  | *InstantArticle* | 
 `ListItemRule` |  | *ListElement* | 

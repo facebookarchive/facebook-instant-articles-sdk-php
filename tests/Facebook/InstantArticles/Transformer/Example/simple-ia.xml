@@ -15,8 +15,8 @@
           <img src="http://domain.com/image-header.png"/>
           <figcaption>Some amazing moment captured by Photographer</figcaption>
         </figure>
-        <h1>The article title</h1>
-        <h2>Sub Title</h2>
+        <h1>The article <b>title</b></h1>
+        <h2>Sub <b>Title</b></h2>
         <address><a>Author name</a></address>
       </header>
       <p>Lorem <b>ipsum</b> dolor sit amet, consectetur adipiscing elit. Sed eu arcu porta, ultrices massa ut, porttitor diam. Integer id auctor augue.</p>

@@ -9,6 +9,7 @@
 namespace Facebook\InstantArticles\Transformer\Rules;
 
 use Facebook\InstantArticles\Elements\Header;
+use Facebook\InstantArticles\Elements\H1;
 
 class HeaderTitleRule extends ConfigurationSelectorRule
 {
@@ -29,7 +30,7 @@ class HeaderTitleRule extends ConfigurationSelectorRule
 
     public function apply($transformer, $header, $h1)
     {
-        $header->withTitle($h1->textContent);
+        $header->withTitle($transformer->transform(H1::create(), $h1));
         return $header;
     }
 }
