@@ -21,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Facebook\\InstantArticles\\": "src/Facebook/InstantArticles/"
+            "Facebook\\InstantArticles\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Facebook\\InstantArticles\\": "tests/Facebook/InstantArticles/"
+            "Facebook\\InstantArticles\\": "tests/"
         }
     },
     "scripts": {
