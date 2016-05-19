@@ -50,6 +50,23 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->client->importArticle($this->article);
     }
 
+    public function testImportArticleAcceptsHtmlSource()
+    {
+        $htmlSource = $this->article->render();
+
+        $this->facebook
+            ->expects($this->once())
+            ->method('post')
+            ->with('PAGE_ID' . Client::EDGE_NAME, [
+                'html_source' => $htmlSource,
+                'take_live' => false,
+                'development_mode' => false,
+            ])
+        ;
+
+        $this->client->importArticle($htmlSource);
+    }
+
     public function testImportArticleTakeLive()
     {
         $this->facebook
