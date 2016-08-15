@@ -64,6 +64,53 @@ class TransformerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($html_file, $result);
     }
 
+    public function testSelfTransformerMultibyteContent()
+    {
+        $json_file = file_get_contents('src/Facebook/InstantArticles/Parser/instant-articles-rules.json');
+
+        $instant_article = InstantArticle::create();
+        $transformer = new Transformer();
+        $transformer->loadRules($json_file);
+
+        $html_file = file_get_contents(__DIR__ . '/instant-article-example-multibyte.html');
+
+        libxml_use_internal_errors(true);
+        $document = new \DOMDocument();
+        $document->loadHTML($html_file);
+        libxml_use_internal_errors(false);
+
+        $transformer->transform($instant_article, $document);
+        $instant_article->addMetaProperty('op:generator:version', '1.0.0');
+        $instant_article->addMetaProperty('op:generator:transformer:version', '1.0.0');
+        $result = $instant_article->render('', true)."\n";
+
+        $this->assertEquals($html_file, $result);
+    }
+
+    public function testSelfTransformerNonUTF8Content()
+    {
+        $json_file = file_get_contents('src/Facebook/InstantArticles/Parser/instant-articles-rules.json');
+
+        $instant_article = InstantArticle::create();
+        $transformer = new Transformer();
+        $transformer->loadRules($json_file);
+
+        $html_file = file_get_contents(__DIR__ . '/instant-article-example-nonutf8.html');
+        $utf8_file = mb_convert_encoding($html_file, 'utf-8', 'auto');
+
+        libxml_use_internal_errors(true);
+        $document = new \DOMDocument();
+        $document->loadHTML($html_file);
+        libxml_use_internal_errors(false);
+
+        $transformer->transform($instant_article, $document);
+        $instant_article->addMetaProperty('op:generator:version', '1.0.0');
+        $instant_article->addMetaProperty('op:generator:transformer:version', '1.0.0');
+        $result = $instant_article->render('', true)."\n";
+
+        $this->assertEquals($utf8_file, $result);
+    }
+
     public function testTransformerAddAndGetRules()
     {
         $transformer = new Transformer();
