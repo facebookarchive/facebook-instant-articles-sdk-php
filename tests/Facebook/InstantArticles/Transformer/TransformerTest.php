@@ -39,6 +39,51 @@ class TransformerTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testTransformString()
+    {
+        $json_file = file_get_contents('src/Facebook/InstantArticles/Parser/instant-articles-rules.json');
+
+        $instant_article = InstantArticle::create();
+        $transformer = new Transformer();
+        $transformer->loadRules($json_file);
+
+        $title_html_string = '<h1>Title String</h1>';
+        $header = Header::create();
+        $transformer->transformString($header, $title_html_string);
+
+        $this->assertEquals('<h1>Title String</h1>', $header->getTitle()->render());
+    }
+
+    public function testTransformStringWithMultibyteUTF8Content()
+    {
+        $json_file = file_get_contents('src/Facebook/InstantArticles/Parser/instant-articles-rules.json');
+
+        $instant_article = InstantArticle::create();
+        $transformer = new Transformer();
+        $transformer->loadRules($json_file);
+
+        $title_html_string = '<h1>Test:あÖÄÜöäü</h1>';
+        $header = Header::create();
+        $transformer->transformString($header, $title_html_string);
+
+        $this->assertEquals('<h1>Test:あÖÄÜöäü</h1>', $header->getTitle()->render());
+    }
+
+    public function testTransformStringWithMultibyteNonUTF8Content()
+    {
+        $json_file = file_get_contents('src/Facebook/InstantArticles/Parser/instant-articles-rules.json');
+
+        $instant_article = InstantArticle::create();
+        $transformer = new Transformer();
+        $transformer->loadRules($json_file);
+
+        $title_html_string = mb_convert_encoding('<h1>Test:あÖÄÜöäü</h1>', 'euc-jp');
+        $header = Header::create();
+        $transformer->transformString($header, $title_html_string, 'euc-jp');
+
+        $this->assertEquals('<h1>Test:あÖÄÜöäü</h1>', $header->getTitle()->render());
+    }
+
     public function testSelfTransformerContent()
     {
         $json_file = file_get_contents('src/Facebook/InstantArticles/Parser/instant-articles-rules.json');

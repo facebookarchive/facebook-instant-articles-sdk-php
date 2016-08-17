@@ -122,6 +122,33 @@ class Transformer
 
     /**
      * @param InstantArticle $context
+     * @param string $content
+     *
+     * @return mixed
+     */
+    public function transformString($context, $content, $encoding = "utf-8")
+    {
+        if ( function_exists( 'mb_convert_encoding' ) ) {
+            $content = mb_convert_encoding( $content, 'HTML-ENTITIES', $encoding );
+        } else {
+            $log = \Logger::getLogger('facebook-instantarticles-transformer');
+            $log->warn(
+                'Your content encoding is "' . $encoding . '" ' .
+                'but your PHP environment does not have mbstring, which may break contents.');
+        }
+        $libxml_previous_state = libxml_use_internal_errors( true );
+        $document = new \DOMDocument( '1.0', 'utf-8' );
+        $document->loadHTML(
+            '<!doctype html><html><head>' .
+            '<meta charset="' . $encoding . '"/><meta http-equiv="Content-Type" content="text/html; charset=' . $encoding . '">' .
+            '</head><body>' . $content . '</body></html>' );
+        libxml_clear_errors();
+        libxml_use_internal_errors( $libxml_previous_state );
+        return $this->transform($context, $document);
+    }
+
+    /**
+     * @param InstantArticle $context
      * @param \DOMNode $node
      *
      * @return mixed
