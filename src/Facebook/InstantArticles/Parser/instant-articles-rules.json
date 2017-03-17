@@ -598,6 +598,59 @@
                 }
             },
             {
+                "class": "SlideshowVideoRule",
+                "selector" : "figure",
+                "containsChild": "video",
+                "properties" : {
+                    "video.url" : {
+                        "type" : "string",
+                        "selector" : "source",
+                        "attribute": "src"
+                    },
+                    "video.type" : {
+                        "type" : "string",
+                        "selector" : "source",
+                        "attribute": "type"
+                    },
+                    "aspect-fit": {
+                        "type": "exists",
+                        "selector" : "figure[data-mode=aspect-fit]"
+                    },
+                    "aspect-fit-only": {
+                        "type": "exists",
+                        "selector" : "figure[data-mode=aspect-fit-only]"
+                    },
+                    "fullscreen": {
+                        "type": "exists",
+                        "selector" : "figure[data-mode=fullscreen]"
+                    },
+                    "non-interactive": {
+                        "type": "exists",
+                        "selector" : "figure[data-mode=non-interactive]"
+                    },
+                    "video.controls": {
+                        "type": "exists",
+                        "selector" : "video",
+                        "attribute": "controls"
+                    },
+                    "video.playback": {
+                        "type": "exists",
+                        "selector" : "video",
+                        "attribute": "data-fb-disable-autoplay"
+                    },
+                    "video.like" : {
+                        "type" : "exists",
+                        "selector" : "figure[data-feedback*='fb:likes']",
+                        "attribute": "data-feedback"
+                    },
+                    "video.comments" : {
+                        "type" : "exists",
+                        "selector" : "figure[data-feedback*='fb:comments']",
+                        "attribute": "data-feedback"
+                    }
+                }
+            },
+            {
                 "class": "SlideshowRule",
                 "selector" : "figure.op-slideshow"
             },

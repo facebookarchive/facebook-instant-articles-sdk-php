@@ -37,9 +37,9 @@ class Slideshow extends Audible implements Container
     private $caption;
 
     /**
-     * @var Image[] the images hosted on web that will be shown on the slideshow
+     * @var Mixed<Image|Video>[] the images or videos hosted on web that will be shown on the slideshow
      */
-    private $article_images = [];
+    private $slideshow_items = [];
 
     /**
      * @var string The json geotag content inside the script geotag
@@ -97,13 +97,13 @@ class Slideshow extends Audible implements Container
     public function withImages($article_images)
     {
         Type::enforceArrayOf($article_images, Image::getClassName());
-        $this->article_images = $article_images;
+        $this->slideshow_items = $article_images;
 
         return $this;
     }
 
     /**
-     * Adds a new image to the slideshow. It is REQUIRED.
+     * Adds a new image to the slideshow.
      *
      * @param Image $article_image The image.
      *
@@ -112,7 +112,37 @@ class Slideshow extends Audible implements Container
     public function addImage($article_image)
     {
         Type::enforce($article_image, Image::getClassName());
-        $this->article_images[] = $article_image;
+        $this->slideshow_items[] = $article_image;
+
+        return $this;
+    }
+
+    /**
+     * Sets the Video list of videos for the slideshow.
+     *
+     * @param Video[] The videos. Ie: http://domain.com/img.png
+     *
+     * @return $this
+     */
+    public function withVideos($article_videos)
+    {
+        Type::enforceArrayOf($article_videos, Video::getClassName());
+        $this->slideshow_items = $article_videos;
+
+        return $this;
+    }
+
+    /**
+     * Adds a new image to the slideshow. It is REQUIRED.
+     *
+     * @param Video $article_image The image.
+     *
+     * @return $this
+     */
+    public function addVideo($article_video)
+    {
+        Type::enforce($article_video, Video::getClassName());
+        $this->slideshow_items[] = $article_video;
 
         return $this;
     }
@@ -159,10 +189,19 @@ class Slideshow extends Audible implements Container
 
     /**
      * @return Image[] The ArticleImages content of the slideshow
+     * @deprecated use getSlideshowItems()
      */
     public function getArticleImages()
     {
-        return $this->article_images;
+        return $this->slideshow_items;
+    }
+
+    /**
+     * @return Mixed<Image|Video>[] The content items of the slideshow
+     */
+    public function getSlideshowItems()
+    {
+        return $this->slideshow_items;
     }
 
     /**
@@ -210,10 +249,10 @@ class Slideshow extends Audible implements Container
         $element->setAttribute('class', 'op-slideshow');
 
         // URL markup required
-        if ($this->article_images) {
-            foreach ($this->article_images as $article_image) {
-                $article_image_element = $article_image->toDOMElement($document);
-                $element->appendChild($article_image_element);
+        if ($this->slideshow_items) {
+            foreach ($this->slideshow_items as $slideshow_item) {
+                $slideshow_item_element = $slideshow_item->toDOMElement($document);
+                $element->appendChild($slideshow_item_element);
             }
         }
 
@@ -247,7 +286,7 @@ class Slideshow extends Audible implements Container
      */
     public function isValid()
     {
-        foreach ($this->article_images as $item) {
+        foreach ($this->slideshow_items as $item) {
             if ($item->isValid()) {
                 return true;
             }
@@ -265,9 +304,9 @@ class Slideshow extends Audible implements Container
     {
         $children = array();
 
-        if ($this->article_images) {
-            foreach ($this->article_images as $article_image) {
-                $children[] = $article_image;
+        if ($this->slideshow_items) {
+            foreach ($this->slideshow_items as $slideshow_item) {
+                $children[] = $slideshow_item;
             }
         }
 
