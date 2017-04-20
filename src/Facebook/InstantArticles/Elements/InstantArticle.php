@@ -564,4 +564,18 @@ class InstantArticle extends Element implements Container, InstantArticleInterfa
 
         return $children;
     }
+
+    public function getFirstParagraph()
+    {
+        $items = $this->getChildren();
+        if ($items) {
+            foreach ($items as $item) {
+                if (Type::is($item, Paragraph::getClassName())) {
+                    return $item;
+                }
+            }
+        }
+        // Case no paragraph exists, we return an empty paragraph
+        return Paragraph::create();
+    }
 }
