@@ -8,6 +8,8 @@
  */
 namespace Facebook\InstantArticles\Transformer\Rules;
 
+use Facebook\InstantArticles\Parser\Parser;
+
 class AuthorRuleTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreateFromProperties()
@@ -52,5 +54,39 @@ class AuthorRuleTest extends \PHPUnit_Framework_TestCase
                 ]
             );
         $this->assertEquals(get_class($author_rule), AuthorRule::getClassName());
+    }
+
+    public function testExpectedNameWithLink()
+    {
+        $expectedName = "The Author";
+        $html =
+            '<header>'.
+                '<h1>Article Title</h1>'.
+                // The name is inside an <a> element
+                "<address><a>$expectedName</a></address>".
+            '</header>';
+
+        $parser = new Parser();
+        $instantArticle = $parser->parse($html);
+        $author = $instantArticle->getHeader()->getAuthors()[0];
+
+        $this->assertEquals($expectedName, $author->getName());
+    }
+
+    public function testExpectedNameWithoutLink()
+    {
+        $expectedName = "The Other Author";
+        $html =
+            '<header>'.
+                '<h1>Article Title</h1>'.
+                // The name is inside the <address> element
+                "<address>$expectedName</address>".
+            '</header>';
+
+        $parser = new Parser();
+        $instantArticle = $parser->parse($html);
+        $author = $instantArticle->getHeader()->getAuthors()[0];
+
+        $this->assertEquals($expectedName, $author->getName());
     }
 }

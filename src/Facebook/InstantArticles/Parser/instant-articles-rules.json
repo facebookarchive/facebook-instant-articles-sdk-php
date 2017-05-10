@@ -248,7 +248,7 @@
             },
             {
                 "class": "AuthorRule",
-                "selector" : "address",
+                "selector" : "//header/address[a]",
                 "properties" : {
                     "author.url" : {
                         "type" : "string",
@@ -267,6 +267,15 @@
                     "author.description" : {
                         "type" : "sibling",
                         "selector" : "a"
+                    }
+                }
+            },
+            {
+                "class": "AuthorRule",
+                "selector" : "//header/address[not(a)]",
+                "properties" : {
+                    "author.name" : {
+                        "type" : "string"
                     }
                 }
             },
