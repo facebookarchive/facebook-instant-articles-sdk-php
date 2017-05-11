@@ -398,7 +398,6 @@ class Type
             return true;
         }
         // Stripes empty spaces, &nbsp;, <br/>, new lines
-        //$test = strip_tags($text);
         $text = preg_replace("/\s+/", "", $text);
         $text = str_replace("&nbsp;", "", $text);
         $text = str_replace("<br>", "", $text);
