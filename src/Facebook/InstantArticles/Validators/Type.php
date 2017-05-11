@@ -386,19 +386,23 @@ class Type
      * "\n" => true
      * "a" => false
      * "  a  " => false
+     * "&nbsp;" => true
+     * "<br>" => true
      *
      * @param string $text The text that will be checked.
      * @return true if empty, false otherwise.
      */
     public static function isTextEmpty($text)
     {
-        if (!isset($text) || $text === null || !self::is($text, self::STRING)) {
+        if ($text === null || !self::is($text, self::STRING)) {
             return true;
         }
         // Stripes empty spaces, &nbsp;, <br/>, new lines
-        $text = strip_tags($text);
-        $text = preg_replace("/[\r\n\s]+/", "", $text);
+        //$test = strip_tags($text);
+        $text = preg_replace("/\s+/", "", $text);
         $text = str_replace("&nbsp;", "", $text);
+        $text = str_replace("<br>", "", $text);
+        $text = str_replace("<br/>", "", $text);
 
         return empty($text);
     }

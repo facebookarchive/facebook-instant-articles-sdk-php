@@ -42,13 +42,13 @@ class ImageTest extends \PHPUnit_Framework_TestCase
                 ->withURL('https://jpeg.org/images/jpegls-home.jpg')
                 ->withCaption(
                     Caption::create()
-                        ->appendText('Some caption to the image')
+                        ->appendText('<3 some caption to the image')
                 );
 
         $expected =
             '<figure>'.
                 '<img src="https://jpeg.org/images/jpegls-home.jpg"/>'.
-                '<figcaption>Some caption to the image</figcaption>'.
+                '<figcaption>&lt;3 some caption to the image</figcaption>'.
             '</figure>';
 
         $rendered = $image->render();
