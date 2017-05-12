@@ -394,7 +394,7 @@ class Type
      */
     public static function isTextEmpty($text)
     {
-        if ($text === null || !self::is($text, self::STRING)) {
+        if (!isset($text) || $text === null || !self::is($text, self::STRING)) {
             return true;
         }
         // Stripes empty spaces, &nbsp;, <br/>, new lines
