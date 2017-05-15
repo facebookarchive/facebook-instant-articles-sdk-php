@@ -41,6 +41,15 @@ abstract class TextContainer extends Element implements Container
     }
 
     /**
+     * Clears the text.
+     *
+     */
+    public function clearText()
+    {
+        $this->textChildren = [];
+    }
+
+    /**
      * @return string[]|FormattedText[]|TextContainer[] All text token for this text container.
      */
     public function getTextChildren()

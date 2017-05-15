@@ -340,15 +340,18 @@ class TypeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(Type::isTextEmpty("\nnot empty\t"));
         $this->assertFalse(Type::isTextEmpty(" not empty "));
         $this->assertFalse(Type::isTextEmpty("&nbsp;not empty"));
+        $this->assertFalse(Type::isTextEmpty("<3 strings"));
     }
 
     public function testStringEmpty()
     {
         $this->assertTrue(Type::isTextEmpty(""));
         $this->assertTrue(Type::isTextEmpty("  "));
-        $this->assertTrue(Type::isTextEmpty("\t\t"));
+        $this->assertTrue(Type::isTextEmpty("\t\n\r"));
         $this->assertTrue(Type::isTextEmpty("&nbsp;"));
         $this->assertTrue(Type::isTextEmpty("\n"));
+        $this->assertTrue(Type::isTextEmpty("<br       >"));
+        $this->assertTrue(Type::isTextEmpty("<br />"));
     }
 
     public function testEnforceElementTag()
