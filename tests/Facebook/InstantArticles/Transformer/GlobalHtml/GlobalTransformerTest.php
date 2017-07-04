@@ -34,13 +34,13 @@ class FullTransformerTest extends \PHPUnit_Framework_TestCase
 
     public function testSelfTransformerContent()
     {
-        $json_file = file_get_contents(__DIR__ . '/full-rules.json');
+        $json_file = file_get_contents(__DIR__ . '/global-rules.json');
 
         $instant_article = InstantArticle::create();
         $transformer = new Transformer();
         $transformer->loadRules($json_file);
 
-        $html_file = file_get_contents(__DIR__ . '/full.html');
+        $html_file = file_get_contents(__DIR__ . '/global.html');
 
         libxml_use_internal_errors(true);
         $document = new \DOMDocument();
@@ -51,7 +51,7 @@ class FullTransformerTest extends \PHPUnit_Framework_TestCase
         $instant_article->addMetaProperty('op:generator:version', '1.0.0');
         $instant_article->addMetaProperty('op:generator:transformer:version', '1.0.0');
         $result = $instant_article->render('', true)."\n";
-        $expected = file_get_contents(__DIR__ . '/full-ia.html');
+        $expected = file_get_contents(__DIR__ . '/global-ia.html');
 
         //var_dump($result);
         $this->assertEquals($expected, $result);
