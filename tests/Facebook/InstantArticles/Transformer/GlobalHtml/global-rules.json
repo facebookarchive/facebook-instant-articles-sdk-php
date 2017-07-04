@@ -38,6 +38,12 @@
                     "selector": "head meta",
                     "attribute": "content"
                 },
+                "article.publish": {
+                    "selector": "div.header meta",
+                    "type": "date",
+                    "attribute": "value",
+                    "format": "Y-m-d\\TH:i:s"
+                },
                 "article.body":{
                     "selector":"article",
                     "type":"element"

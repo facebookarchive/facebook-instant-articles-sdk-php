@@ -12,6 +12,7 @@ class GetterFactory
 {
     const TYPE_STRING_GETTER = 'string';
     const TYPE_INTEGER_GETTER = 'int';
+    const TYPE_DATE_GETTER = 'date';
     const TYPE_CHILDREN_GETTER = 'children';
     const TYPE_ELEMENT_GETTER = 'element';
     const TYPE_CONSTANT_GETTER = 'constant';
@@ -34,6 +35,7 @@ class GetterFactory
      * @see StringGetter
      * @see ChildrenGetter
      * @see IntegerGetter
+     * @see DateGetter
      * @see ElementGetter
      * @see ConstantGetter
      * @see NextSiblingGetter
@@ -50,6 +52,7 @@ class GetterFactory
         $GETTERS = [
             self::TYPE_STRING_GETTER => StringGetter::getClassName(),
             self::TYPE_INTEGER_GETTER => IntegerGetter::getClassName(),
+            self::TYPE_DATE_GETTER => DateGetter::getClassName(),
             self::TYPE_CHILDREN_GETTER => ChildrenGetter::getClassName(),
             self::TYPE_ELEMENT_GETTER => ElementGetter::getClassName(),
             self::TYPE_FRAGMENT_GETTER => FragmentGetter::getClassName(),

@@ -11,6 +11,7 @@ namespace Facebook\InstantArticles\Transformer\Rules;
 use Facebook\InstantArticles\Elements\InstantArticle;
 use Facebook\InstantArticles\Elements\Header;
 use Facebook\InstantArticles\Elements\Author;
+use Facebook\InstantArticles\Elements\Time;
 use Facebook\InstantArticles\Elements\H1;
 use Facebook\InstantArticles\Transformer\Warnings\InvalidSelector;
 
@@ -92,7 +93,7 @@ class GlobalRule extends ConfigurationSelectorRule
             $transformer->addWarning(
                 new InvalidSelector(
                     self::PROPERTY_GLOBAL_AUTHOR_NAME,
-                    $header,
+                    $instantArticle,
                     $node,
                     $this
                 )
@@ -103,12 +104,36 @@ class GlobalRule extends ConfigurationSelectorRule
         $articleTitle = $this->getProperty(self::PROPERTY_GLOBAL_TITLE, $node);
         if ($articleTitle) {
             $header->withTitle($transformer->transform(H1::create(), $articleTitle));
+        } else {
+            $transformer->addWarning(
+                new InvalidSelector(
+                    self::PROPERTY_GLOBAL_TITLE,
+                    $instantArticle,
+                    $node,
+                    $this
+                )
+            );
         }
 
         // Treats Canonical URL
         $articleCanonicalUrl = $this->getProperty(self::PROPERTY_GLOBAL_CANONICAL_URL, $node);
         if ($articleCanonicalUrl) {
             $instantArticle->withCanonicalURL($articleCanonicalUrl);
+        } else {
+            $transformer->addWarning(
+                new InvalidSelector(
+                    self::PROPERTY_GLOBAL_CANONICAL_URL,
+                    $instantArticle,
+                    $node,
+                    $this
+                )
+            );
+        }
+
+        // Treats Time Published
+        $timePublished = $this->getProperty(self::PROPERTY_TIME_PUBLISHED, $node);
+        if ($timePublished) {
+            $header->withTime(Time::create(Time::PUBLISHED)->withDatetime($timePublished));
         }
 
         $body = $this->getProperty(self::PROPERTY_GLOBAL_BODY, $node);
