@@ -37,11 +37,11 @@ class GlobalRule extends ConfigurationSelectorRule
 
     public static function createFrom($configuration)
     {
-        $author_rule = GlobalRule::create();
+        $rule = GlobalRule::create();
 
-        $author_rule->withSelector($configuration['selector']);
+        $rule->withSelector($configuration['selector']);
         $properties = $configuration['properties'];
-        $author_rule->withProperties(
+        $rule->withProperties(
             [
                 self::PROPERTY_GLOBAL_AUTHOR_URL,
                 self::PROPERTY_GLOBAL_AUTHOR_NAME,
@@ -55,7 +55,7 @@ class GlobalRule extends ConfigurationSelectorRule
             $properties
         );
 
-        return $author_rule;
+        return $rule;
     }
 
     public function apply($transformer, $instantArticle, $node)
