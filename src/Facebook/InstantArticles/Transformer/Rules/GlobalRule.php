@@ -88,7 +88,6 @@ class GlobalRule extends ConfigurationSelectorRule
             if ($authorUrl) {
                 $author->withURL($authorUrl);
             }
-
         } else {
             $transformer->addWarning(
                 new InvalidSelector(
