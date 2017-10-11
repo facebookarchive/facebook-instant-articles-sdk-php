@@ -180,9 +180,9 @@ class H1Test extends \PHPUnit_Framework_TestCase
     {
         $h1 =
             H1::create()
-                ->appendText('&nbsp;');
+                ->appendText(' ');
 
-        $expected = '';
+        $expected = '<h1> </h1>';
 
         $rendered = $h1->render();
         $this->assertEquals($expected, $rendered);
@@ -194,7 +194,7 @@ class H1Test extends \PHPUnit_Framework_TestCase
             H1::create()
                 ->appendText('  ');
 
-        $expected = '';
+        $expected = '<h1>  </h1>';
 
         $rendered = $h1->render();
         $this->assertEquals($expected, $rendered);
@@ -204,9 +204,9 @@ class H1Test extends \PHPUnit_Framework_TestCase
     {
         $h1 =
             H1::create()
-                ->appendText("\t\n\r");
+                ->appendText("\t\n");
 
-        $expected = '';
+        $expected = "<h1>\t\n</h1>";
 
         $rendered = $h1->render();
         $this->assertEquals($expected, $rendered);
@@ -218,7 +218,7 @@ class H1Test extends \PHPUnit_Framework_TestCase
             H1::create()
                 ->appendText(Bold::create()->appendText('  '));
 
-        $expected = '';
+        $expected = '<h1><b>  </b></h1>';
 
         $rendered = $h1->render();
         $this->assertEquals($expected, $rendered);

@@ -26,9 +26,9 @@ class ListElementTest extends \PHPUnit_Framework_TestCase
         $list =
             ListElement::createOrdered()
                 ->addItem('')
-                ->addItem(' ')
-                ->addItem("\t")
-                ->addItem("\n \t");
+                ->addItem('')
+                ->addItem('')
+                ->addItem('');
 
         $expected = '';
 

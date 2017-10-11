@@ -116,9 +116,9 @@ class ParagraphTest extends \PHPUnit_Framework_TestCase
     {
         $paragraph =
             Paragraph::create()
-                ->appendText('&nbsp;');
+                ->appendText(' ');
 
-        $expected = '';
+        $expected = '<p> </p>';
 
         $rendered = $paragraph->render();
         $this->assertEquals($expected, $rendered);
@@ -130,7 +130,7 @@ class ParagraphTest extends \PHPUnit_Framework_TestCase
             Paragraph::create()
                 ->appendText('  ');
 
-        $expected = '';
+        $expected = '<p>  </p>';
 
         $rendered = $paragraph->render();
         $this->assertEquals($expected, $rendered);
@@ -140,9 +140,9 @@ class ParagraphTest extends \PHPUnit_Framework_TestCase
     {
         $paragraph =
             Paragraph::create()
-                ->appendText("\t\n\r");
+                ->appendText("\t\n");
 
-        $expected = '';
+        $expected = "<p>\t\n</p>";
 
         $rendered = $paragraph->render();
         $this->assertEquals($expected, $rendered);
@@ -152,7 +152,7 @@ class ParagraphTest extends \PHPUnit_Framework_TestCase
     {
         $paragraph =
             Paragraph::create()
-                ->appendText(Bold::create()->appendText('  '));
+                ->appendText(Bold::create()->appendText(''));
 
         $expected = '';
 

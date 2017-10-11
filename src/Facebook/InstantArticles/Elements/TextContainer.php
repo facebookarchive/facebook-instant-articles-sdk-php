@@ -129,7 +129,7 @@ abstract class TextContainer extends Element implements Container
             }
         }
 
-        return !Type::isTextEmpty($textContent);
+        return $textContent !== '';
     }
 
     /**

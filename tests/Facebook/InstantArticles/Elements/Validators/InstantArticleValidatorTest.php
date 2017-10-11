@@ -41,7 +41,7 @@ class InstantArticleValidatorTest extends \PHPUnit_Framework_TestCase
                 ->addChild(Paragraph::create())
 
                 // Warning 4 - Invalid paragraph
-                ->addChild(Paragraph::create()->appendText(" \n \t "))
+                ->addChild(Paragraph::create()->appendText(''))
 
                 ->addChild(
                     // Warning 5 - Invalid image without URL
