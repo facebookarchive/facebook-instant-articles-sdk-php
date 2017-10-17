@@ -66,17 +66,24 @@ class SlideshowImageRule extends ConfigurationSelectorRule
             );
         }
 
-        $caption = Caption::create();
+        $caption = null;
 
         $caption_title = $this->getProperty(self::PROPERTY_CAPTION_TITLE, $node);
         if ($caption_title) {
+            $caption = Caption::create();
             $caption->withTitle($caption_title);
-            $image->withCaption($caption);
         }
 
         $caption_credit = $this->getProperty(self::PROPERTY_CAPTION_CREDIT, $node);
         if ($caption_credit) {
+            if ($caption === null) {
+               $caption = Caption::create();
+            }
             $caption->withCredit($caption_credit);
+        }
+
+        if ($caption !== null) {
+            $image->withCaption($caption);
         }
 
         return $slideshow;
