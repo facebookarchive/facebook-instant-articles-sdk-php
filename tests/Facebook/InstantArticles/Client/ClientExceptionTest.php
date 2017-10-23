@@ -1,4 +1,4 @@
-<?php
+<?hh //decl
 
 namespace Facebook\InstantArticles\Client;
 

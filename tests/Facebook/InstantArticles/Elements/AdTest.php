@@ -1,4 +1,4 @@
-<?php
+<?hh //decl
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -8,12 +8,10 @@
  */
 namespace Facebook\InstantArticles\Elements;
 
-use Facebook\InstantArticles\Transformer\GeneratorTrait;
 use Facebook\Util\BaseHTMLTestCase;
 
 class AdTest extends BaseHTMLTestCase
 {
-    use GeneratorTrait;
 
     public function testRenderEmpty()
     {
@@ -27,15 +25,13 @@ class AdTest extends BaseHTMLTestCase
 
     public function testRenderBasic()
     {
-        $source = $this->getFaker()->url;
-
         $ad =
             Ad::create()
-                ->withSource($source);
+                ->withSource('http://foo.com');
 
         $expected =
             '<figure class="op-ad">'.
-                '<iframe src="'. $source . '"></iframe>'.
+                '<iframe src="http://foo.com"></iframe>'.
             '</figure>';
 
         $rendered = $ad->render();

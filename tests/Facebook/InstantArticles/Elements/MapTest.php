@@ -1,4 +1,4 @@
-<?php
+<?hh //decl
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -8,6 +8,7 @@
  */
 namespace Facebook\InstantArticles\Elements;
 
+use Facebook\InstantArticles\Elements\Map as Map;
 use Facebook\Util\BaseHTMLTestCase;
 
 class MapTest extends BaseHTMLTestCase

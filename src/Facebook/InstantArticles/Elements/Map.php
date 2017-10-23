@@ -1,4 +1,4 @@
-<?php
+<?hh //decl
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -188,9 +188,9 @@ class Map extends Audible implements ChildrenContainer
     }
 
     /**
-     * Implements the ChildrenContainer::getContainerChildren().
+     * Implements the Container::getContainerChildren().
      *
-     * @see ChildrenContainer::getContainerChildren().
+     * @see Container::getContainerChildren().
      * @return array of Elements contained by Image.
      */
     public function getContainerChildren()

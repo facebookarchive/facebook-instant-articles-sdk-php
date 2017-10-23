@@ -1,4 +1,4 @@
-<?php
+<?hh //decl
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -80,7 +80,7 @@ class InstantArticleRule extends ConfigurationSelectorRule
             $instant_article->disableAutomaticAdPlacement();
         } else {
             $instant_article->enableAutomaticAdPlacement();
-            $pairs = explode(' ', $auto_ad_placement, 2);
+            $pairs = explode(' ', $auto_ad_placement ?: '', 2);
             if (count($pairs) === 2) {
                 list($name, $value) = explode('=', $pairs[1], 2);
                 $instant_article->withAdDensity($value);

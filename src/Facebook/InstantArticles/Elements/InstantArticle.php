@@ -1,4 +1,4 @@
-<?php
+<?hh //decl
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -9,6 +9,7 @@
 namespace Facebook\InstantArticles\Elements;
 
 use Facebook\InstantArticles\Validators\Type;
+use Facebook\InstantArticles\Elements\Map as Map;
 
 /**
   * Class InstantArticle
@@ -459,7 +460,7 @@ class InstantArticle extends Element implements ChildrenContainer, InstantArticl
 
         $link = $document->createElement('link');
         $link->setAttribute('rel', 'canonical');
-        $link->setAttribute('href', $this->canonicalURL);
+        $link->setAttribute('href', $this->canonicalURL ?: '');
         $head->appendChild($link);
 
         $charset = $document->createElement('meta');

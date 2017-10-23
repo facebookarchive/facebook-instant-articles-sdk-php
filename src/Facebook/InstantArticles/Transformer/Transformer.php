@@ -1,4 +1,4 @@
-<?php
+<?hh //decl
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -88,7 +88,7 @@ class Transformer
     public static function markAsProcessed($node)
     {
         if (Type::is($node, 'DOMElement')) {
-            $node->setAttribute(self::INSTANT_ARTICLES_PARSED_FLAG, true);
+            $node->setAttribute(self::INSTANT_ARTICLES_PARSED_FLAG, 'true');
         }
     }
 
@@ -99,7 +99,7 @@ class Transformer
      */
     protected static function isProcessed($node)
     {
-        return Type::is($node, 'DOMElement') && $node->getAttribute(self::INSTANT_ARTICLES_PARSED_FLAG);
+        return Type::is($node, 'DOMElement') && $node->getAttribute(self::INSTANT_ARTICLES_PARSED_FLAG) == 'true';
     }
 
 
@@ -190,11 +190,6 @@ class Transformer
         if (function_exists('mb_convert_encoding')) {
             $document->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', $encoding));
         } else {
-            $log = \Logger::getLogger('facebook-instantarticles-transformer');
-            $log->debug(
-                'Your content encoding is "' . $encoding . '" ' .
-                'but your PHP environment does not have mbstring. Trying to load your content with using meta tags.'
-            );
             // wrap the content with charset meta tags
             $document->loadHTML(
                 '<html><head>' .
@@ -221,14 +216,11 @@ class Transformer
             $this->instantArticle = $context;
         }
 
-        $log = \Logger::getLogger('facebook-instantarticles-transformer');
         if (!$node) {
-            $e = new \Exception();
-            $log->error(
+            error_log(
                 'Transformer::transform($context, $node) requires $node'.
                 ' to be a valid one. Check on the stacktrace if this is '.
-                'some nested transform operation and fix the selector.',
-                $e->getTraceAsString()
+                'some nested transform operation and fix the selector.'
             );
         }
         $current_context = $context;
@@ -238,8 +230,6 @@ class Transformer
                     continue;
                 }
                 $matched = false;
-                $log->debug("===========================");
-                $log->debug($child->ownerDocument->saveHtml($child));
 
                 // Get all classes and interfaces this context extends/implements
                 $contextClassNames = self::getAllClassTypes($context->getClassName());
@@ -279,13 +269,6 @@ class Transformer
                     ) {
                     $tag_content = $child->ownerDocument->saveXML($child);
                     $tag_trimmed = trim($tag_content);
-                    if (!empty($tag_trimmed)) {
-                        $log->debug('context class: '.get_class($context));
-                        $log->debug('node name: '.$child->nodeName);
-                        $log->debug("CONTENT NOT MATCHED: \n".$tag_content);
-                    } else {
-                        $log->debug('empty content ignored');
-                    }
 
                     $this->addWarning(new UnrecognizedElement($current_context, $child));
                 }

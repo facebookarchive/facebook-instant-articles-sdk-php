@@ -1,4 +1,4 @@
-<?php
+<?hh //decl
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -223,11 +223,11 @@ class Interactive extends ElementWithHTML implements ChildrenContainer
         }
 
         if ($this->width) {
-            $iframe->setAttribute('width', $this->width);
+            $iframe->setAttribute('width', strval($this->width));
         }
 
         if ($this->height) {
-            $iframe->setAttribute('height', $this->height);
+            $iframe->setAttribute('height', strval($this->height));
         }
 
         // Ad markup

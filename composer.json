@@ -10,13 +10,11 @@
         "homepage": "https://github.com/facebook/facebook-instant-articles-sdk-php/contributors"
     }],
     "require": {
-        "php": "^5.4 || ^7.0",
-        "symfony/css-selector": "2.8.* || ^3.0",
-        "facebook/graph-sdk": "~5.0",
-        "apache/log4php": "2.3.0"
+        "php": "^7.0",
+        "symfony/css-selector": "3.x",
+        "facebook/graph-sdk": "~5.0"
     },
     "require-dev": {
-        "fzaninotto/faker": "^1.6.0",
         "phpunit/phpunit": "^4.8",
         "squizlabs/php_codesniffer": "^2.6.0"
     },

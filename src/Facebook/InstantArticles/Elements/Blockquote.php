@@ -1,4 +1,4 @@
-<?php
+<?hh //decl
 /**
  * Copyright 2014 Facebook, Inc.
  *
