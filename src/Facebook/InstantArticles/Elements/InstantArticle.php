@@ -55,12 +55,22 @@ class InstantArticle extends Element implements ChildrenContainer, InstantArticl
      * @var boolean The ad strategy that will be used. True by default
      */
     private $isAutomaticAdPlaced = true;
-
+    
     /**
      * @var string The ad density that will be used. "default" by default
      */
     private $adDensity = 'default';
 
+    /**
+     * @var boolean The ad strategy that will be used. False by default
+     */
+    private $isRecirculationAdPlaced = false;
+
+    /**
+     * @var string The ad placement strategy that will be used. Optional
+     */
+    private $adRecirculationPlacement;
+    
     /**
      * @var string The charset that will be used. "utf-8" by default.
      */
@@ -171,6 +181,37 @@ class InstantArticle extends Element implements ChildrenContainer, InstantArticl
     public function disableAutomaticAdPlacement()
     {
         $this->isAutomaticAdPlaced = false;
+        return $this;
+    }
+
+    /**
+     * Use the strategy of auto recirculation ad placement
+     */
+    public function disableAutomaticRecirculationPlacement()
+    {
+        $this->isRecirculationAdPlaced = true;
+        return $this;
+    }
+
+    /**
+     * Use the strategy of manual recirculation ad placement
+     */
+    public function enableAutomaticRecirculationPlacement()
+    {
+        $this->isRecirculationAdPlaced = false;
+        return $this;
+    }
+
+    /**
+     * Sets the recirculation ad placement to be applied to this Instant Article
+     * 
+     * @param string $adRecirculationPlacement Ad placement
+     * 
+     * @return $this
+     */
+    public function withRecirculationPlacement($adRecirculationPlacement)
+    {
+        $this->adRecirculationPlacement = $adRecirculationPlacement;
         return $this;
     }
 
@@ -476,6 +517,13 @@ class InstantArticle extends Element implements ChildrenContainer, InstantArticl
             } else {
                 $this->addMetaProperty('fb:use_automatic_ad_placement', 'false');
             }
+        }
+
+        if ($this->header && $this->isRecirculationAdPlaced && $this->adRecirculationPlacement) {
+            $this->addMetaProperty(
+                'fb:op-recirculation-ads',
+                $this->adRecirculationPlacement
+            );
         }
 
         if ($this->style) {

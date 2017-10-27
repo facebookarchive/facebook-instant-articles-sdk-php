@@ -17,6 +17,7 @@ class InstantArticleRule extends ConfigurationSelectorRule
     const PROPERTY_CHARSET = 'article.charset';
     const PROPERTY_MARKUP_VERSION = 'article.markup.version';
     const PROPERTY_AUTO_AD_PLACEMENT = 'article.auto.ad';
+    const PROPERTY_RECIRCULATION_AD_PLACEMENT = 'article.recirculation.ad';
     const PROPERTY_STYLE = 'article.style';
 
     public function getContextClass()
@@ -40,6 +41,7 @@ class InstantArticleRule extends ConfigurationSelectorRule
                 self::PROPERTY_CHARSET,
                 self::PROPERTY_MARKUP_VERSION,
                 self::PROPERTY_AUTO_AD_PLACEMENT,
+                self::PROPERTY_RECIRCULATION_AD_PLACEMENT,
                 self::PROPERTY_STYLE
             ],
             $configuration
@@ -85,6 +87,14 @@ class InstantArticleRule extends ConfigurationSelectorRule
                 list($name, $value) = explode('=', $pairs[1], 2);
                 $instant_article->withAdDensity($value);
             }
+        }
+
+        $recirculation_ad_placement = $this->getProperty(self::PROPERTY_RECIRCULATION_AD_PLACEMENT, $node);
+        if (is_null($recirculation_ad_placement)) {
+            $instant_article->disableAutomaticRecirculationPlacement();
+        } else {
+            $instant_article->enableAutomaticRecirculationPlacement();
+            $instant_article->withRecirculationPlacement($recirculation_ad_placement);
         }
 
         $style = $this->getProperty(self::PROPERTY_STYLE, $node);
