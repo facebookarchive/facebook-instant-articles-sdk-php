@@ -204,9 +204,9 @@ class InstantArticle extends Element implements ChildrenContainer, InstantArticl
 
     /**
      * Sets the recirculation ad placement to be applied to this Instant Article
-     * 
+     *
      * @param string $adRecirculationPlacement Ad placement
-     * 
+     *
      * @return $this
      */
     public function withRecirculationPlacement($adRecirculationPlacement)
