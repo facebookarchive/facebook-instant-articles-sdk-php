@@ -1,6 +1,9 @@
 # Fix TravisCI, add github token
 language: php
 
+env:
+  - GITHUB_TOKEN=fbc9f8b635109c0c7ad64013ff8346908389f5f9
+
 matrix:
   include:
     - php: 5.4
