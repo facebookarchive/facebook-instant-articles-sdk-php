@@ -189,7 +189,7 @@ class InstantArticle extends Element implements ChildrenContainer, InstantArticl
      */
     public function disableAutomaticRecirculationPlacement()
     {
-        $this->isRecirculationAdPlaced = true;
+        $this->isRecirculationAdPlaced = false;
         return $this;
     }
 
@@ -198,7 +198,7 @@ class InstantArticle extends Element implements ChildrenContainer, InstantArticl
      */
     public function enableAutomaticRecirculationPlacement()
     {
-        $this->isRecirculationAdPlaced = false;
+        $this->isRecirculationAdPlaced = true;
         return $this;
     }
 
