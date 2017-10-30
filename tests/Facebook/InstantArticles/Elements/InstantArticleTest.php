@@ -847,7 +847,6 @@ class InstantArticleTest extends BaseHTMLTestCase
                             'Author user in facebook'.
                         '</address>'.
                         '<h3 class="op-kicker">Some kicker of this article</h3>'.
-                        '<figure class="op-ad"><iframe src="http://foo.com"></iframe></figure>'.
                     '</header>'.
                     '<p>Some text to be within a paragraph for testing.</p>'.
                     '<p>Other text to be within a second paragraph for testing.</p>'.
@@ -863,6 +862,9 @@ class InstantArticleTest extends BaseHTMLTestCase
                         '</figure>'.
                     '</figure>'.
                     '<p>Some text to be within a paragraph for testing.</p>'.
+                    '<figure class="op-ad">'.
+                        '<iframe src="http://foo.com"></iframe>'.
+                    '</figure>'.
                     '<p>Other text to be within a second paragraph for testing.</p>'.
                     '<figure class="op-tracker">'.
                         '<iframe>'.
