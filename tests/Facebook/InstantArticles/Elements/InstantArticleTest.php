@@ -824,8 +824,8 @@ class InstantArticleTest extends BaseHTMLTestCase
                 '<meta property="op:generator" content="facebook-instant-articles-sdk-php"/>'.
                 '<meta property="op:generator:version" content="'.InstantArticle::CURRENT_VERSION.'"/>'.
                 '<meta property="op:markup_version" content="v1.0"/>'.
-                '<meta property="fb:article_style" content="myarticlestyle"/>'.
                 '<meta property="fb:op-recirculation-ads" content="placement_id=536990673154512_811481037959775"/>'.
+                '<meta property="fb:article_style" content="myarticlestyle"/>'.
             '</head>'.
             '<body>'.
                 '<article>'.
@@ -863,9 +863,6 @@ class InstantArticleTest extends BaseHTMLTestCase
                         '</figure>'.
                     '</figure>'.
                     '<p>Some text to be within a paragraph for testing.</p>'.
-                    '<figure class="op-ad">'.
-                        '<iframe src="http://foo.com"></iframe>'.
-                    '</figure>'.
                     '<p>Other text to be within a second paragraph for testing.</p>'.
                     '<figure class="op-tracker">'.
                         '<iframe>'.
