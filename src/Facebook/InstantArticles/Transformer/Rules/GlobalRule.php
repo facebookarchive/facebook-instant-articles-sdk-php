@@ -13,6 +13,7 @@ use Facebook\InstantArticles\Elements\Header;
 use Facebook\InstantArticles\Elements\Author;
 use Facebook\InstantArticles\Elements\Time;
 use Facebook\InstantArticles\Elements\H1;
+use Facebook\InstantArticles\Elements\Image;
 use Facebook\InstantArticles\Transformer\Warnings\InvalidSelector;
 
 class GlobalRule extends ConfigurationSelectorRule
@@ -25,6 +26,7 @@ class GlobalRule extends ConfigurationSelectorRule
     const PROPERTY_GLOBAL_TITLE = 'article.title';
     const PROPERTY_TIME_PUBLISHED = 'article.publish';
     const PROPERTY_GLOBAL_BODY = 'article.body';
+    const PROPERTY_GLOBAL_HEADER_IMAGE = 'image.url';
 
     public function getContextClass()
     {
@@ -51,7 +53,8 @@ class GlobalRule extends ConfigurationSelectorRule
                 self::PROPERTY_GLOBAL_CANONICAL_URL,
                 self::PROPERTY_GLOBAL_TITLE,
                 self::PROPERTY_TIME_PUBLISHED,
-                self::PROPERTY_GLOBAL_BODY
+                self::PROPERTY_GLOBAL_BODY,
+                self::PROPERTY_GLOBAL_HEADER_IMAGE
             ],
             $properties
         );
@@ -134,6 +137,21 @@ class GlobalRule extends ConfigurationSelectorRule
         $timePublished = $this->getProperty(self::PROPERTY_TIME_PUBLISHED, $node);
         if ($timePublished) {
             $header->withTime(Time::create(Time::PUBLISHED)->withDatetime($timePublished));
+        }
+
+        // Treats Header Image
+        $articleHeaderImage = $this->getProperty(self::PROPERTY_GLOBAL_HEADER_IMAGE, $node);
+        if ($articleHeaderImage) {
+            $header->withCover($articleHeaderImage);
+        } else {
+            $transformer->addWarning(
+                new InvalidSelector(
+                self::PROPERTY_GLOBAL_HEADER_IMAGE,
+                $instantArticle,
+                $node,
+                $this  
+              )
+            )
         }
 
         $body = $this->getProperty(self::PROPERTY_GLOBAL_BODY, $node);
