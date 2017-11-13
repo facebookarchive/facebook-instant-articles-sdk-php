@@ -140,18 +140,18 @@ class GlobalRule extends ConfigurationSelectorRule
         }
 
         // Treats Header Image
-        $articleHeaderImage = $this->getProperty(self::PROPERTY_GLOBAL_HEADER_IMAGE, $node);
-        if ($articleHeaderImage) {
-            $header->withCover($articleHeaderImage);
+        $articleHeaderImageURL = $this->getProperty(self::PROPERTY_GLOBAL_HEADER_IMAGE, $node);
+        if ($articleHeaderImageURL) {
+            $header->withCover(Image::create()->withURL($articleHeaderImageURL));
         } else {
             $transformer->addWarning(
                 new InvalidSelector(
                 self::PROPERTY_GLOBAL_HEADER_IMAGE,
                 $instantArticle,
                 $node,
-                $this  
+                $this
               )
-            )
+            );
         }
 
         $body = $this->getProperty(self::PROPERTY_GLOBAL_BODY, $node);

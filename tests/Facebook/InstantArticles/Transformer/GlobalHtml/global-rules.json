@@ -47,6 +47,11 @@
                 "article.body":{
                     "selector":"article",
                     "type":"element"
+                },
+                "image.url":{
+                    "selector":"div.hero-image img",
+                    "type":"string",
+                    "attribute":"src"
                 }
             }
         },
@@ -172,19 +177,8 @@
             }
         },
         {
-            "class":"HeaderImageRule",
-            "selector":"div.hero-image",
-            "properties":{
-                "image.url":{
-                    "type":"string",
-                    "selector":"img",
-                    "attribute":"src"
-                },
-                "image.caption":{
-                    "type":"element",
-                    "selector":"div.image-caption"
-                }
-            }
+            "class":"IgnoreRule",
+            "selector":"div.hero-image"
         },
         {
             "class":"SocialEmbedRule",
