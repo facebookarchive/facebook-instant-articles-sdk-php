@@ -146,11 +146,11 @@ class GlobalRule extends ConfigurationSelectorRule
         } else {
             $transformer->addWarning(
                 new InvalidSelector(
-                self::PROPERTY_GLOBAL_HEADER_IMAGE,
-                $instantArticle,
-                $node,
-                $this
-              )
+                    self::PROPERTY_GLOBAL_HEADER_IMAGE,
+                    $instantArticle,
+                    $node,
+                    $this
+                )
             );
         }
 
