@@ -143,15 +143,6 @@ class GlobalRule extends ConfigurationSelectorRule
         $articleHeaderImageURL = $this->getProperty(self::PROPERTY_GLOBAL_HEADER_IMAGE, $node);
         if ($articleHeaderImageURL) {
             $header->withCover(Image::create()->withURL($articleHeaderImageURL));
-        } else {
-            $transformer->addWarning(
-                new InvalidSelector(
-                    self::PROPERTY_GLOBAL_HEADER_IMAGE,
-                    $instantArticle,
-                    $node,
-                    $this
-                )
-            );
         }
 
         $body = $this->getProperty(self::PROPERTY_GLOBAL_BODY, $node);
