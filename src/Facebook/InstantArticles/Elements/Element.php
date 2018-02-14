@@ -39,6 +39,7 @@ abstract class Element
             $element = $this->toDOMElement($document);
             $document->appendChild($element);
             $rendered = $doctype.$document->saveXML($element, LIBXML_NOEMPTYTAG);
+            $rendered = str_replace("&#13;", "", $rendered);
         } else {
             $rendered = '';
         }
