@@ -35,11 +35,26 @@ class TransformerTest extends BaseHTMLTestCase
         $this->assertEqualsHtml('<h1>Title String</h1>', $header->getTitle()->render());
     }
 
+    public function testTransformStringWithHTML5Entities()
+    {
+        $json_file = file_get_contents('src/Facebook/InstantArticles/Parser/instant-articles-rules.json');
+
+        $instant_article = InstantArticle::create();
+        $transformer = new Transformer();
+        $transformer->loadRules($json_file);
+
+        $title_html_string = '<h1>Title String&period;</h1>';
+        $header = Header::create();
+        $transformer->transformString($header, $title_html_string);
+
+        $this->assertEqualsHtml('<h1>Title String.</h1>', $header->getTitle()->render());
+    }
+
     public function testDontTransformHTMLEntitiesTwice()
     {
         $author = Author::create()->withName("Test &amp; Test");
         $rendered = $author->render('', true);
-        $this->assertEqualsHtml("<address><a>Test &amp; Test</a></address>", $rendered);
+        $this->assertEqualsHtml("<address><a>Test & Test</a></address>", $rendered);
     }
 
     public function testTransformStringWithMultibyteUTF8Content()
@@ -111,12 +126,7 @@ class TransformerTest extends BaseHTMLTestCase
         $instant_article->addMetaProperty('op:generator:transformer:version', '1.0.0');
         $result = $instant_article->render('', true)."\n";
 
-        // some fragments are written as html entities even after transformed so
-        // noralize all strings to html entities and compare them.
-        $this->assertEqualsHtml(
-            mb_convert_encoding($html_file, 'HTML-ENTITIES', 'utf-8'),
-            mb_convert_encoding($result, 'HTML-ENTITIES', 'utf-8')
-        );
+        $this->assertEqualsHtml($html_file, $result);
     }
 
     public function testSelfTransformerNonUTF8Content()
@@ -141,6 +151,7 @@ class TransformerTest extends BaseHTMLTestCase
             mb_convert_encoding($html_file, 'HTML-ENTITIES', 'euc-jp'),
             mb_convert_encoding($result, 'HTML-ENTITIES', 'utf-8')
         );
+        // $this->assertEqualsHtml($html_file, $result);
     }
 
     public function testTransformerAddAndGetRules()
