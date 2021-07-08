@@ -31,7 +31,12 @@ class MultipleElementsGetter extends AbstractGetter
     {
         $fragment = $node->ownerDocument->createDocumentFragment();
         foreach ($this->children as $child) {
-            $cloned_node = Transformer::cloneNode($child->get($node));
+            $childNode = $child->get($node);
+            if ($childNode === null) {
+                continue;
+            }
+            $cloned_node = Transformer::cloneNode($childNode);
+            
             if (Type::is($cloned_node, 'DOMNode')) {
                 $fragment->appendChild($cloned_node);
             }
