@@ -64,7 +64,7 @@ class TypeTest extends TestCase
 
     public function testIsNotInException()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         Type::enforce(
             Caption::create(),
@@ -85,7 +85,7 @@ class TypeTest extends TestCase
 
     public function testIsNotInEmptyException()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         Type::enforce(
             Caption::create(),
@@ -108,7 +108,7 @@ class TypeTest extends TestCase
 
     public function testIsNotInSetException()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         Type::enforce(
             Caption::create(),
@@ -144,7 +144,7 @@ class TypeTest extends TestCase
 
     public function testIsNotInInheritanceException()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         Type::enforce(
             AnimatedGIF::create(),
@@ -168,7 +168,7 @@ class TypeTest extends TestCase
 
     public function testIsNotStringException()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         Type::enforce(1, Type::STRING);
     }
@@ -220,7 +220,7 @@ class TypeTest extends TestCase
 
     public function testIsNotArrayInInheritanceException()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         Type::enforceArrayOf(
             [Image::create(), Video::create()],
@@ -263,7 +263,7 @@ class TypeTest extends TestCase
 
     public function testEnforceArrayMinSizeException()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         Type::enforceArraySizeGreaterThan([1,2,3], 4);
     }
@@ -288,7 +288,7 @@ class TypeTest extends TestCase
 
     public function testEnforceArrayMaxSizeException()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         Type::enforceArraySizeLowerThan([1,2,3], 2);
     }
@@ -330,7 +330,7 @@ class TypeTest extends TestCase
 
     public function testEnforceWithinExceptionString()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         Type::enforceWithin('a', ['x', 'y', 'z']);
     }
@@ -363,7 +363,7 @@ class TypeTest extends TestCase
     public function testEnforceElementTagFalse()
     {
         $document = new \DOMDocument();
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         Type::enforceElementTag($document->createElement('body'), 'img');
     }
 

@@ -14,7 +14,7 @@ class RuleTest extends TestCase
 {
     public function testCreateFromPropertiesThrowsException()
     {
-        $this->setExpectedException(
+        $this->expectException(
             'Exception',
             'All Rule class extensions should implement the Rule::createFrom($configuration) method'
         );
@@ -24,7 +24,7 @@ class RuleTest extends TestCase
 
     public function testCreateThrowsException()
     {
-        $this->setExpectedException(
+        $this->expectException(
             'Exception',
             'All Rule class extensions should implement the Rule::create() method'
         );

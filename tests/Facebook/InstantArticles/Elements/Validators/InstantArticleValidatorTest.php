@@ -127,6 +127,6 @@ class InstantArticleValidatorTest extends TestCase
         $warnings = array();
         InstantArticleValidator::getReport(array($footer), $warnings);
         $this->assertCount(1, $warnings);
-        $this->assertContains('Footer must have at least one of the', $warnings[0]->__toString());
+        $this->assertStringContainsString('Footer must have at least one of the', $warnings[0]->__toString());
     }
 }
