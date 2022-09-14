@@ -18,7 +18,8 @@
     "require": {
         "php": "^5.4 || ^5.6 || ^7 || ^8",
         "symfony/css-selector": "^2.8 || ^3.1 || ^4.1",
-        "facebook/graph-sdk": "dev-php8"
+        "facebook/graph-sdk": "dev-php8",
+        "phpcompatibility/phpcompatibility-wp": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "dev-master",
