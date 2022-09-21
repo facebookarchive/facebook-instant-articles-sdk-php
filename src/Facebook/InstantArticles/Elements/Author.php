@@ -194,7 +194,9 @@ class Author extends Element
         $element->appendChild($ahref);
 
         // Appends author description
-        $element->appendChild($document->createTextNode($this->description));
+        if ($this->description !== null) {
+            $element->appendChild($document->createTextNode($this->description));
+        }
 
         return $element;
     }
