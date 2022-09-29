@@ -245,21 +245,11 @@ class Transformer
         );
         $libxml_previous_state = libxml_use_internal_errors(true);
         $document = new \DOMDocument('1.0');
-        if (function_exists('mb_convert_encoding')) {
-            $document->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', $encoding));
-        } else {
-            $this->addLog(
-                TransformerLog::DEBUG,
-                'Your content encoding is "' . $encoding . '" ' .
-                'but your PHP environment does not have mbstring. Trying to load your content with using meta tags.'
-            );
-            // wrap the content with charset meta tags
-            $document->loadHTML(
-                '<html><head>' .
-                '<meta http-equiv="Content-Type" content="text/html; charset=' . $encoding . '">' .
-                '</head><body>' . $content . '</body></html>'
-            );
-        }
+        $document->loadHTML(
+            '<html><head>' .
+            '<meta http-equiv="Content-Type" content="text/html; charset=' . $encoding . '">' .
+            '</head><body>' . htmlentities( $content, ENT_NOQUOTES ) . '</body></html>'
+        );
         libxml_clear_errors();
         libxml_use_internal_errors($libxml_previous_state);
         $result = $this->transform($context, $document);
