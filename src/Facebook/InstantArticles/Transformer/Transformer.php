@@ -246,7 +246,7 @@ class Transformer
         $libxml_previous_state = libxml_use_internal_errors(true);
         $document = new \DOMDocument('1.0');
         if (function_exists('mb_convert_encoding')) {
-            $document->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', $encoding));
+            $document->loadHTML(htmlspecialchars_decode(htmlentities(mb_convert_encoding($content, 'UTF-8', $encoding), ENT_NOQUOTES)));
         } else {
             $this->addLog(
                 TransformerLog::DEBUG,
