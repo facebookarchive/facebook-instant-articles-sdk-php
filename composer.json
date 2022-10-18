@@ -16,7 +16,7 @@
     },
     "require-dev": {
         "fzaninotto/faker": "dev-master",
-        "phpunit/phpunit": "4.8.*",
+        "phpunit/phpunit": "^9.5",
         "symfony/yaml": "2.1.* || 3.4.*",
         "phpdocumentor/reflection-docblock": "^2.0 || ^4.0",
         "squizlabs/php_codesniffer": "^2.6.0 || ^3.0.0"

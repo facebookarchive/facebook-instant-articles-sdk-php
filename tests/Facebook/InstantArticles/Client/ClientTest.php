@@ -12,6 +12,7 @@ use Facebook\Facebook;
 use Facebook\InstantArticles\Elements\InstantArticle;
 use Facebook\InstantArticles\Elements\Paragraph;
 use PHPUnit\Framework\TestCase;
+use Facebook\InstantArticles\Client\ClientException;
 
 class ClientTest extends TestCase
 {
@@ -19,7 +20,7 @@ class ClientTest extends TestCase
     private $article;
     private $facebook;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->facebook = $this->getMockBuilder('Facebook\Facebook')
             ->disableOriginalConstructor()
@@ -135,22 +136,18 @@ class ClientTest extends TestCase
             ->willReturn($expectedSubmissionStatusID);
 
         $this->facebook
-            ->expects($this->at(0))
-            ->method('post')
-            ->with('PAGE_ID' . Client::EDGE_NAME, [
-                'html_source' => $this->article->render(),
-                'published' => true,
-                'development_mode' => false,
-            ])
-            ->willReturn($serverResponseMock);
-
-        $this->facebook
-            ->expects($this->at(1))
-            ->method('post')
-            ->with('/', [
-                'id' => $this->article->getCanonicalURL(),
-                'scrape' => 'true',
-            ])
+            ->expects ($this->exactly(2))
+            ->method ('post')
+            ->withConsecutive(
+                ['PAGE_ID' . Client::EDGE_NAME, [
+                    'html_source' => $this->article->render(),
+                    'published' => true,
+                    'development_mode' => false,
+                ]],
+                ['/', [
+                    'id' => $this->article->getCanonicalURL(),
+                    'scrape' => 'true',
+                ]])
             ->willReturn($serverResponseMock);
 
         $resultSubmissionStatusID = $this->client->importArticle($this->article, true, true);
@@ -792,7 +789,7 @@ class ClientTest extends TestCase
             ->with('PAGE_ID/claimed_urls?url=' .$url)
             ->willReturn($serverResponseMock);
 
-        $this->setExpectedException('\Facebook\InstantArticles\Client\ClientException');
+        $this->expectException( ClientException::class );
 
         $result = $this->client->claimURL($url);
     }
@@ -868,7 +865,7 @@ class ClientTest extends TestCase
             ->with('PAGE_ID/?instant_articles_submit_for_review=true')
             ->willReturn($serverResponseMock);
 
-        $this->setExpectedException('\Facebook\InstantArticles\Client\ClientException');
+        $this->expectException(\Facebook\InstantArticles\Client\ClientException::class);
 
         $result = $this->client->submitForReview();
     }
