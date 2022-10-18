@@ -50,11 +50,11 @@ class TransformerTest extends BaseHTMLTestCase
         $transformer = new Transformer();
         $transformer->loadRules($json_file);
 
-        $title_html_string = '<h1>Test:あÖÄÜöäü</h1>';
+        $title_html_string = '<h1>Test:&あÖÄÜöäü唐আ</h1>';
         $header = Header::create();
         $transformer->transformString($header, $title_html_string);
 
-        $this->assertEqualsHtml('<h1>Test:あÖÄÜöäü</h1>', $header->getTitle()->render());
+        $this->assertEqualsHtml('<h1>Test:&amp;あÖÄÜöäü唐আ</h1>', $header->getTitle()->render());
     }
 
     public function testTransformStringWithMultibyteNonUTF8Content()
