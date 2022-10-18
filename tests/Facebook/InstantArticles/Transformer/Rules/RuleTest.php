@@ -14,20 +14,16 @@ class RuleTest extends TestCase
 {
     public function testCreateFromPropertiesThrowsException()
     {
-        $this->setExpectedException(
-            'Exception',
-            'All Rule class extensions should implement the Rule::createFrom($configuration) method'
-        );
+        $this->expectException( \Exception::class );
+        $this->expectExceptionMessage( 'All Rule class extensions should implement the Rule::createFrom($configuration) method' );
 
         Rule::createFrom([]);
     }
 
     public function testCreateThrowsException()
     {
-        $this->setExpectedException(
-            'Exception',
-            'All Rule class extensions should implement the Rule::create() method'
-        );
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('All Rule class extensions should implement the Rule::create() method');
 
         Rule::create();
     }
