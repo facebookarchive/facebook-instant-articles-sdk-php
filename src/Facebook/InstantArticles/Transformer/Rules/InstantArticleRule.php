@@ -80,13 +80,13 @@ class InstantArticleRule extends ConfigurationSelectorRule
         $auto_ad_placement = $this->getProperty(self::PROPERTY_AUTO_AD_PLACEMENT, $node);
         if ($auto_ad_placement === 'false') {
             $instant_article->disableAutomaticAdPlacement();
-        } else {
+        } elseif ( $auto_ad_placement !== null ) {
             $instant_article->enableAutomaticAdPlacement();
-            $pairs = explode(' ', $auto_ad_placement, 2);
-            if (count($pairs) === 2) {
-                list($name, $value) = explode('=', $pairs[1], 2);
-                $instant_article->withAdDensity($value);
-            }
+			$pairs = explode( ' ', $auto_ad_placement, 2 );
+			if ( count( $pairs ) === 2 ) {
+				list( $name, $value ) = explode( '=', $pairs[1], 2 );
+				$instant_article->withAdDensity( $value );
+			}
         }
 
         $recirculation_ad_placement = $this->getProperty(self::PROPERTY_RECIRCULATION_AD_PLACEMENT, $node);
