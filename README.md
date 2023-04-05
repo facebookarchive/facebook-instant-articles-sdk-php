@@ -3,6 +3,14 @@
 [![CircleCI](https://circleci.com/gh/facebook/facebook-instant-articles-sdk-php.svg?style=shield)](https://circleci.com/gh/facebook/facebook-instant-articles-sdk-php)
 [![Latest Stable Version](https://poser.pugx.org/facebook/facebook-instant-articles-sdk-php/v/stable)](https://packagist.org/packages/facebook/facebook-instant-articles-sdk-php)
 
+## 🚨 Important Note
+
+**⚠️ Instant Articles will not be available starting April 20, 2023**
+
+All related developer tools will be archived.
+
+---
+
 The Facebook Instant Articles SDK for PHP provides a native interface for creating and publishing Instant Articles. The SDK enables developers to more easily integrate Instant Articles into content management systems and in turn enables journalist and publishers to easily publish Instant Articles.
 
 The SDK consists of three components:
