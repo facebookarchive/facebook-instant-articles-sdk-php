@@ -19,7 +19,7 @@ class ClientTest extends TestCase
     private $article;
     private $facebook;
 
-    protected function setUp()
+    public function setUp(): void
     {
         $this->facebook = $this->getMockBuilder('Facebook\Facebook')
             ->disableOriginalConstructor()
@@ -792,7 +792,7 @@ class ClientTest extends TestCase
             ->with('PAGE_ID/claimed_urls?url=' .$url)
             ->willReturn($serverResponseMock);
 
-        $this->setExpectedException('\Facebook\InstantArticles\Client\ClientException');
+        $this->expectException('\Facebook\InstantArticles\Client\ClientException');
 
         $result = $this->client->claimURL($url);
     }
@@ -868,7 +868,7 @@ class ClientTest extends TestCase
             ->with('PAGE_ID/?instant_articles_submit_for_review=true')
             ->willReturn($serverResponseMock);
 
-        $this->setExpectedException('\Facebook\InstantArticles\Client\ClientException');
+        $this->expectException('\Facebook\InstantArticles\Client\ClientException');
 
         $result = $this->client->submitForReview();
     }
