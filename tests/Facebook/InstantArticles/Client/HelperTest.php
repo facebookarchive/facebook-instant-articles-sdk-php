@@ -16,7 +16,7 @@ class HelperTest extends TestCase
     private $helper;
     private $facebook;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->facebook = $this->getMockBuilder('Facebook\Facebook')
             ->disableOriginalConstructor()

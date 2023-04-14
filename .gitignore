@@ -4,3 +4,4 @@ composer.lock
 *.ignored
 **/IgnoredTest.php
 .DS_Store
+.phpunit.result.cache
