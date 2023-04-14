@@ -14,7 +14,7 @@ class TimeTest extends BaseHTMLTestCase
 {
     private $timeDate;
 
-    protected function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('UTC');
         $this->timeDate = \DateTime::createFromFormat(

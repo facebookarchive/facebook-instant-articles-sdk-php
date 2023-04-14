@@ -19,7 +19,7 @@ class ClientTest extends TestCase
     private $article;
     private $facebook;
 
-    protected function setUp()
+    public function setUp(): void
     {
         $this->facebook = $this->getMockBuilder('Facebook\Facebook')
             ->disableOriginalConstructor()
@@ -715,7 +715,7 @@ class ClientTest extends TestCase
             ->with('PAGE_ID/claimed_urls?url=' . $url)
             ->willReturn($serverResponseMock);
 
-        $result = $this->client->claimURL($url);
+        $this->client->claimURL($url);
     }
 
     public function testClaimURLWithProtocl()
@@ -753,7 +753,7 @@ class ClientTest extends TestCase
             ->with('PAGE_ID/claimed_urls?url=example.com')
             ->willReturn($serverResponseMock);
 
-        $result = $this->client->claimURL($url);
+        $this->client->claimURL($url);
     }
 
     public function testClaimURLError()
@@ -792,9 +792,9 @@ class ClientTest extends TestCase
             ->with('PAGE_ID/claimed_urls?url=' .$url)
             ->willReturn($serverResponseMock);
 
-        $this->setExpectedException('\Facebook\InstantArticles\Client\ClientException');
+        $this->expectException('\Facebook\InstantArticles\Client\ClientException');
 
-        $result = $this->client->claimURL($url);
+        $this->client->claimURL($url);
     }
 
     public function testSubmitForReview()
@@ -868,8 +868,8 @@ class ClientTest extends TestCase
             ->with('PAGE_ID/?instant_articles_submit_for_review=true')
             ->willReturn($serverResponseMock);
 
-        $this->setExpectedException('\Facebook\InstantArticles\Client\ClientException');
+        $this->expectException('\Facebook\InstantArticles\Client\ClientException');
 
-        $result = $this->client->submitForReview();
+        $this->client->submitForReview();
     }
 }

@@ -61,7 +61,7 @@ class SimpleTransformerTest extends BaseHTMLTestCase
 
     public function testSelfTransformerContentMultipleAdsSettings()
     {
-        $this->setExpectedException(
+        $this->expectException(
             'Exception',
             'You must specify only one Ads Setting, either audience_network_placement_id or raw_html'
         );
